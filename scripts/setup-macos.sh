@@ -28,7 +28,10 @@ killall Finder
 defaults write com.apple.dock show-recents -bool false;
 # Hidden way to change amount of recent items in dock (cool)
 # defaults write com.apple.dock show-recent-count -int 3;
+# Organise spaces automatically (hell no!)
 defaults write com.apple.dock mru-spaces -bool true
+defaults write -g AppleSpacesSwitchOnActivate -bool false
+defaults write com.apple.dock tilesize -int 28
 killall Dock
 
 
@@ -89,5 +92,5 @@ defaults write com.knollsoft.Rectangle gapSize -int 4
 # defaults write com.knollsoft.Hookshot screenEdgeGapRight -int 4
 # defaults write com.knollsoft.Hookshot gapSize -int 4
 
-
 echo "Done! You may need to restart for all changes to take effect."
+
