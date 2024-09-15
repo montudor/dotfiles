@@ -66,7 +66,7 @@ fi
 
 # Install Homebrew packages from Brewfile
 echo "Installing homebrew packages..."
-brew bundle --no-fail-fast --file="$(dirname "$0")/../brew/Brewfile-core" || true
+brew bundle --file="$(dirname "$0")/../brew/Brewfile-core" || true
 
 
 # Tmux TPM Install
