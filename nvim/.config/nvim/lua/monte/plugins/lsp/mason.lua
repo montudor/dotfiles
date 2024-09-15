@@ -42,6 +42,9 @@ return {
 
 				-- Java
 				"jdtls",
+
+				-- Bash
+				"bashls",
 			},
 		})
 
