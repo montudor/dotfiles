@@ -21,3 +21,11 @@ vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set("n", "<leader>to", "<cmd>tabonly<CR>", { desc = "Close other tabs" })
 vim.keymap.set("n", "<leader>tl", "<cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader>th", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
+
+-- inlay hints
+if vim.lsp.inlay_hint then
+	vim.keymap.set("n", "<leader>uh", function()
+		local scope = { bufnr = 0 }
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(scope), scope)
+	end, { desc = "Toggle inlay hints" })
+end
