@@ -4,8 +4,8 @@ mkdir -p ~/.config
 
 # Keyboard and Mouse Config
 defaults write -g ApplePressAndHoldEnabled -bool false
-defaults write -g InitialKeyRepeat -int 8
-defaults write -g KeyRepeat -int 1
+defaults write -g InitialKeyRepeat -int 12
+defaults write -g KeyRepeat -int 2
 defaults write -g com.apple.mouse.scaling -1
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
@@ -31,7 +31,7 @@ defaults write com.apple.dock show-recents -bool false;
 # Organise spaces automatically (hell no!)
 defaults write com.apple.dock mru-spaces -bool true
 defaults write -g AppleSpacesSwitchOnActivate -bool false
-defaults write com.apple.dock tilesize -int 28
+defaults write com.apple.dock tilesize -int 36
 
 create_dock_item() {
     local app_path="$1"
