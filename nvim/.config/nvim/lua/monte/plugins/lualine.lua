@@ -5,6 +5,15 @@ return {
 		local lualine = require("lualine")
 		local lazy_status = require("lazy.status")
 
+		local function macro_recording()
+			local recording_register = vim.fn.reg_recording()
+			if recording_register == "" then
+				return ""
+			end
+
+			return "Recording @" .. recording_register
+		end
+
 		local function diff_source()
 			local gitsigns = vim.b.gitsigns_status_dict
 			if gitsigns then
@@ -21,7 +30,11 @@ return {
 				theme = "catppuccin-mocha",
 			},
 			sections = {
-				lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff_source } },
+				lualine_b = {
+					{ "macro-recording", fmt = macro_recording },
+					{ "b:gitsigns_head", icon = "" },
+					{ "diff", source = diff_source },
+				},
 				lualine_x = {
 					{
 						lazy_status.updates,
