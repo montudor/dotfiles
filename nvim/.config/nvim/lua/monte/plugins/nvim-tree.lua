@@ -14,6 +14,7 @@ return {
 				relativenumber = true,
 			},
 			renderer = {
+				highlight_git = true,
 				indent_markers = {
 					enable = true,
 				},
@@ -31,6 +32,7 @@ return {
 			-- to work well with window splits
 			actions = {
 				open_file = {
+					quit_on_open = false,
 					window_picker = {
 						enable = false,
 					},
