@@ -1,5 +1,6 @@
 -- JDTLS (Java LSP) configuration
 local jdtls = require("jdtls")
+local util = require("monte.util")
 -- local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 -- local project_root = vim.fn.getcwd()
 local root_dir = vim.fs.root(0, { "mvnw", "pom.xml", "build.gradle", "gradlew", ".git" }) or vim.fn.getcwd()
@@ -83,6 +84,7 @@ local config = {
 		java = {
 			-- TODO: messs with this and sdkman?
 			-- home = '/usr/lib/jvm/java-17-openjdk-amd64',
+			inlayHints = { parameterNames = { enabled = "all" } },
 			eclipse = {
 				downloadSources = true,
 			},
@@ -93,7 +95,7 @@ local config = {
 				enabled = true,
 			},
 			referencesCodeLens = {
-				enabled = true,
+				enabled = true, --vim.lsp.codelens.refresh() in autocmd?
 			},
 			references = {
 				includeDecompiledSources = true,
@@ -119,18 +121,18 @@ local config = {
 	-- if you want to use additional eclipse.jdt.ls plugins.
 	--
 	-- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
-	--
-	-- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
 	init_options = {
-		bundles = {},
+		bundles = bundles,
 	},
 }
 
 -- Debugging
--- config['on_attach'] = function(client, bufnr)
---   jdtls.setup_dap({ hotcodereplace = 'auto' })
---   require('jdtls.dap').setup_dap_main_class_configs()
--- end
+if util.has("nvim-dap") then
+	config["on_attach"] = function(client, bufnr)
+		jdtls.setup_dap({ hotcodereplace = "auto" })
+		require("jdtls.dap").setup_dap_main_class_configs()
+	end
+end
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
