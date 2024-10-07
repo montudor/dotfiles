@@ -16,11 +16,11 @@ vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Equalize splits" })
 vim.keymap.set("n", "<leader>sc", "<cmd>close<CR>", { desc = "Close split" })
 
 -- tabs
-vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>", { desc = "New tab" })
-vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<CR>", { desc = "Close tab" })
-vim.keymap.set("n", "<leader>to", "<cmd>tabonly<CR>", { desc = "Close other tabs" })
-vim.keymap.set("n", "<leader>tl", "<cmd>tabnext<CR>", { desc = "Next tab" })
-vim.keymap.set("n", "<leader>th", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader>ztn", "<cmd>tabnew<CR>", { desc = "New tab" })
+vim.keymap.set("n", "<leader>ztc", "<cmd>tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "<leader>zto", "<cmd>tabonly<CR>", { desc = "Close other tabs" })
+vim.keymap.set("n", "<leader>ztl", "<cmd>tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader>zth", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
 
 -- inlay hints
 if vim.lsp.inlay_hint then

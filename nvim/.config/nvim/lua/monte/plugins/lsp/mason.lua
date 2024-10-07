@@ -61,6 +61,7 @@ return {
 				"black",
 				"isort",
 				"pylint",
+				"debugpy",
 
 				-- Rust
 				"codelldb",
