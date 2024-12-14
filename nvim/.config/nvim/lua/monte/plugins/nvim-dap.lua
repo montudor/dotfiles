@@ -34,7 +34,7 @@ return {
 			})
 
 			vim.keymap.set("n", "<leader>bb", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
-			vim.keymap.set("n", "<leader>gb", dap.run_to_cursor, { desc = "Run to cursor" })
+			vim.keymap.set("n", "<leader>brc", dap.run_to_cursor, { desc = "Run to cursor" })
 			vim.keymap.set("n", "<leader>bc", dap.continue, { desc = "Continue" })
 			vim.keymap.set("n", "<leader>bsi", dap.step_into, { desc = "Step into" })
 			vim.keymap.set("n", "<leader>bss", dap.step_over, { desc = "Step over" })
