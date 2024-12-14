@@ -28,8 +28,8 @@ return {
 
 		telescope.load_extension("fzf")
 
-		vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-		vim.keymap.set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
+		vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files in cwd" })
+		vim.keymap.set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Find recent/oldfiles" })
 		vim.keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 		vim.keymap.set(
 			"n",
@@ -42,8 +42,14 @@ return {
 		vim.keymap.set("n", "<leader>fh", "<cmd>Telescope git_status<cr>", { desc = "Find git status" })
 		vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "Find diagnostic issues" })
 		vim.keymap.set("n", "<leader>fm", "<cmd>Telescope keymaps<cr>", { desc = "Find keymaps" })
-
-		--resume last search
 		vim.keymap.set("n", "<leader>fr", "<cmd>Telescope resume<cr>", { desc = "Resume last search" })
+		vim.keymap.set("n", "<leader>fq", "<cmd>Telescope quickfix<cr>", { desc = "Find quickfix" })
+		vim.keymap.set("n", "<leader>fl", "<cmd>Telescope loclist<cr>", { desc = "Find loclist" })
+		vim.keymap.set(
+			"n",
+			"<leader>fa",
+			"<cmd>Telescope find_files cwd=" .. vim.fn.expand("%:p:h") .. "<cr>",
+			{ desc = "Find all relative to current file" }
+		)
 	end,
 }
