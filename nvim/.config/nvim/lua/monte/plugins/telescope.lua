@@ -45,11 +45,8 @@ return {
 		vim.keymap.set("n", "<leader>fr", "<cmd>Telescope resume<cr>", { desc = "Resume last search" })
 		vim.keymap.set("n", "<leader>fq", "<cmd>Telescope quickfix<cr>", { desc = "Find quickfix" })
 		vim.keymap.set("n", "<leader>fl", "<cmd>Telescope loclist<cr>", { desc = "Find loclist" })
-		vim.keymap.set(
-			"n",
-			"<leader>fa",
-			"<cmd>Telescope find_files cwd=" .. vim.fn.expand("%:p:h") .. "<cr>",
-			{ desc = "Find all relative to current file" }
-		)
+		vim.keymap.set("n", "<leader>fa", function()
+			require("telescope.builtin").find_files({ cwd = vim.fn.expand("%:p:h") })
+		end, { desc = "Find all relative to current file" })
 	end,
 }
