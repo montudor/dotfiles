@@ -5,6 +5,5 @@ font-size = 12
 font-thicken = true
 theme = nightfox
 
-macos-titlebar-style = tabs
 macos-option-as-alt = left
 
