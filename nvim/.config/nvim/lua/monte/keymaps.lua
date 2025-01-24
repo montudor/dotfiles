@@ -1,13 +1,12 @@
 -- space on top
 vim.g.mapleader = " "
 
--- basic
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>ps", vim.cmd.S)
-vim.keymap.set("n", "<leader>pw", vim.cmd.W)
-vim.keymap.set("n", "<leader>q", vim.cmd.Q)
-
+-- clear highlights
 vim.keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear highlights" })
+
+-- move lines
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line selection up" })
 
 -- splits
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split vertically" })
