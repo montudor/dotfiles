@@ -22,6 +22,13 @@ return {
 						["<C-p>"] = actions.cycle_history_prev,
 						["<C-n>"] = actions.cycle_history_next,
 					},
+					n = {
+						["<C-k>"] = actions.move_selection_previous,
+						["<C-j>"] = actions.move_selection_next,
+						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+						["<C-p>"] = actions.cycle_history_prev,
+						["<C-n>"] = actions.cycle_history_next,
+					},
 				},
 			},
 		})
