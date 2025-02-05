@@ -45,7 +45,10 @@ return {
 			end, { desc = "Evaluate under cursor" })
 
 			vim.keymap.set("n", "<leader>br", dap.restart, { desc = "Restart DAP" })
-			vim.keymap.set("n", "<leader>bs", dap.close, { desc = "Stop DAP" })
+			vim.keymap.set("n", "<leader>bx", dap.close, { desc = "Stop DAP" })
+			vim.keymap.set("n", "<leader>bu", function()
+				ui.toggle()
+			end, { desc = "Toggle DAP UI" })
 
 			dap.listeners.before.attach.dapui_config = function()
 				ui.open()
