@@ -13,6 +13,7 @@ vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split vertically" })
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split horizontally" })
 vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Equalize splits" })
 vim.keymap.set("n", "<leader>sc", "<cmd>close<CR>", { desc = "Close split" })
+vim.keymap.set("n", "<leader>st", "<cmd>tabedit %<CR>", { desc = "Open split in new tab" })
 
 -- tabs
 vim.keymap.set("n", "<leader>ztn", "<cmd>tabnew<CR>", { desc = "New tab" })
