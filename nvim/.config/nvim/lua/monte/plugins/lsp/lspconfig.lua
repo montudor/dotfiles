@@ -95,9 +95,47 @@ return {
 					capabilities = capabilities,
 					root_dir = lspconfig.util.root_pattern("angular.json", "project.json", "nx.json"),
 					cmd = cmd,
+					---@diagnostic disable-next-line: unused-local
 					on_new_config = function(new_config, new_root_dir)
 						new_config.cmd = cmd
 					end,
+				})
+			end,
+
+			["volar"] = function()
+				lspconfig["volar"].setup({
+					capabilities = capabilities,
+					filetypes = { "vue" },
+					root_dir = lspconfig.util.root_pattern("package.json", "nx.json", "vue.config.js"),
+					init_options = {
+						vue = {
+							hybridMode = false,
+						},
+					},
+				})
+			end,
+
+			["ts_ls"] = function()
+				lspconfig["ts_ls"].setup({
+					capabilities = capabilities,
+					filetypes = {
+						"typescript",
+						"javascript",
+						"javascriptreact",
+						"typescriptreact",
+						"typescript.tsx",
+					},
+					root_dir = lspconfig.util.root_pattern("package.json", "nx.json", "tsconfig.json"),
+					init_options = {
+						plugins = {
+							{
+								name = "@vue/typescript-plugin",
+								location = vim.fn.stdpath("data")
+									.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+								languages = { "vue" },
+							},
+						},
+					},
 				})
 			end,
 
@@ -120,6 +158,7 @@ return {
 						"scss",
 						"less",
 						"svelte",
+						"vue",
 					},
 				})
 			end,

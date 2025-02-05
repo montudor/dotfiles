@@ -24,6 +24,7 @@ return {
 				-- JS and co. :(
 				"ts_ls",
 				"angularls",
+				"volar",
 				"html",
 				"cssls",
 				"tailwindcss",
