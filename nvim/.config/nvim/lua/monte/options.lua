@@ -34,3 +34,10 @@ augroup highlight_yank
   autocmd TextYankPost * silent! lua vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
 augroup END
 ]])
+
+vim.diagnostic.config({
+	virtual_text = true,
+	float = {
+		source = true,
+	},
+})
