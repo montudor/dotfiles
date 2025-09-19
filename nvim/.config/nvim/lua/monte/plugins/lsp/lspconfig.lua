@@ -11,6 +11,7 @@ return {
 		local util = require("lspconfig/util")
 		local mason_lspconfig = require("mason-lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		local kotlin_handler = require("monte.plugins.lsp.util.kotlin")
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -35,10 +36,10 @@ return {
 				vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
 
 				opts.desc = "See available code actions"
-				vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+				vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
 
 				opts.desc = "Smart rename"
-				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+				vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
 
 				opts.desc = "Show buffer diagnostics"
 				vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
@@ -151,6 +152,7 @@ return {
 					capabilities = capabilities,
 					filetypes = {
 						"html",
+						"htmlangular",
 						"typescriptreact",
 						"javascriptreact",
 						"css",
@@ -200,6 +202,20 @@ return {
 
 			["jdtls"] = function()
 				-- NOTE: We let jdtls configure itself
+			end,
+
+			["kotlin_language_server"] = function()
+				lspconfig["kotlin_language_server"].setup({
+					capabilities = capabilities,
+					root_dir = lspconfig.util.root_pattern(
+						"build.gradle.kts",
+						"settings.gradle.kts",
+						"pom.xml",
+						".git"
+					),
+					filetypes = { "kotlin", "kt", "kts" },
+					settings = kotlin_handler.settings(),
+				})
 			end,
 		})
 	end,

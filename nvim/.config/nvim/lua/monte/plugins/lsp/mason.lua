@@ -44,6 +44,9 @@ return {
 				-- Java
 				"jdtls",
 
+				-- Kotlin
+				"kotlin_language_server",
+
 				-- Bash
 				"bashls",
 			},

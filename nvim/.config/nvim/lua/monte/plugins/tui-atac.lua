@@ -7,6 +7,6 @@ return {
 		})
 	end,
 	keys = {
-		{ "<leader>la", "<cmd>Atac<cr>", desc = "Open atac API client (similar to Postman & Insomnia)" },
+		-- { "<leader>la", "<cmd>Atac<cr>", desc = "Open atac API client (similar to Postman & Insomnia)" },
 	},
 }
