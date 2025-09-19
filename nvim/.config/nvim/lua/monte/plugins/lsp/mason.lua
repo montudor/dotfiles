@@ -1,8 +1,14 @@
 return {
+	-- TODO: update to v2
 	"williamboman/mason.nvim",
+	version = "^1.0.0",
 	dependencies = {
-		"williamboman/mason-lspconfig.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		{ "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
+		{
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			version = "^1.0.0",
+			dependencies = { "williamboman/mason.nvim", version = "^1.0.0" },
+		},
 	},
 	config = function()
 		local mason = require("mason")
