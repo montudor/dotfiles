@@ -36,6 +36,7 @@ return {
 					cwd = require("conform.util").root_file({
 						"package.json",
 						"prettier.config.js",
+						"prettier.config.mjs",
 						".prettierrc",
 						".prettierignore",
 						".editorconfig",
