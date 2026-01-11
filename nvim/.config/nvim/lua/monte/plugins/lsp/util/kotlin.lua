@@ -35,6 +35,11 @@ function M.settings()
 				},
 			},
 		},
+		hints = {
+			typeHints = true,
+			parameterHints = true,
+			variableTypeHints = true,
+		},
 	}
 end
 

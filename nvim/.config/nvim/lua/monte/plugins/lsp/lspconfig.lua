@@ -214,6 +214,9 @@ return {
 						".git"
 					),
 					filetypes = { "kotlin", "kt", "kts" },
+					init_options = {
+						storagePath = vim.fn.resolve(vim.fn.stdpath("cache") .. "/kotlin_language_server"),
+					},
 					settings = kotlin_handler.settings(),
 				})
 			end,
