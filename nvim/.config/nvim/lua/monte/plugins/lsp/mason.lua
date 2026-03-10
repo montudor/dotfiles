@@ -50,6 +50,7 @@ return {
 
 				-- Kotlin
 				"kotlin_language_server",
+				"kotlin_lsp",
 
 				-- Bash
 				"bashls",

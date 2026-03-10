@@ -25,7 +25,7 @@ function M.detect_jvm_target()
 	end
 end
 
-function M.settings()
+function M.legacy_kotlin_language_server_settings()
 	local target = M.detect_jvm_target()
 	return {
 		kotlin = {

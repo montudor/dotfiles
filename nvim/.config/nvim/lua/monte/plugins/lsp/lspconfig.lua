@@ -152,13 +152,21 @@ return {
 			},
 		})
 
-		vim.lsp.config("kotlin_language_server", {
+		-- vim.lsp.config("kotlin_language_server", {
+		-- 	root_markers = { "build.gradle.kts", "settings.gradle.kts", "pom.xml", ".git" },
+		-- 	filetypes = { "kotlin", "kt", "kts" },
+		-- 	init_options = {
+		-- 		storagePath = vim.fn.resolve(vim.fn.stdpath("cache") .. "/kotlin_language_server"),
+		-- 	},
+		-- 	settings = kotlin_handler.legacy_kotlin_language_server_settings(),
+		-- })
+
+		vim.lsp.config("kotlin_lsp", {
 			root_markers = { "build.gradle.kts", "settings.gradle.kts", "pom.xml", ".git" },
 			filetypes = { "kotlin", "kt", "kts" },
 			init_options = {
-				storagePath = vim.fn.resolve(vim.fn.stdpath("cache") .. "/kotlin_language_server"),
+				storagePath = vim.fn.resolve(vim.fn.stdpath("cache") .. "/kotlin_lsp"),
 			},
-			settings = kotlin_handler.settings(),
 		})
 
 		-- We don't enable all servers by default
@@ -171,7 +179,8 @@ return {
 			"emmet_ls",
 			"graphql",
 			"html",
-			"kotlin_language_server",
+			-- "kotlin_language_server",
+			"kotlin_lsp",
 			"lua_ls",
 			"pyright",
 			"tailwindcss",
