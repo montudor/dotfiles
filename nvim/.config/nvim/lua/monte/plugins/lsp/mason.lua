@@ -1,13 +1,10 @@
 return {
-	-- TODO: update to v2
-	"williamboman/mason.nvim",
-	version = "^1.0.0",
+	"mason-org/mason.nvim",
 	dependencies = {
-		{ "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
+		{ "mason-org/mason-lspconfig.nvim" },
 		{
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			version = "^1.0.0",
-			dependencies = { "williamboman/mason.nvim", version = "^1.0.0" },
+			dependencies = { "mason-org/mason.nvim" },
 		},
 	},
 	config = function()
@@ -26,11 +23,12 @@ return {
 		})
 
 		mason_lspconfig.setup({
+			automatic_enable = false,
 			ensure_installed = {
 				-- JS and co. :(
 				"ts_ls",
 				"angularls",
-				"volar",
+				"vue_ls",
 				"html",
 				"cssls",
 				"tailwindcss",

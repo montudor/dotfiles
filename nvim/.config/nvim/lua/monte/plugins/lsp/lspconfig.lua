@@ -7,9 +7,6 @@ return {
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		local lspconfig = require("lspconfig")
-		local util = require("lspconfig/util")
-		local mason_lspconfig = require("mason-lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 		local kotlin_handler = require("monte.plugins.lsp.util.kotlin")
 
@@ -70,156 +67,118 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-		mason_lspconfig.setup_handlers({
-			-- default handler
-			function(server_name)
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-				})
-			end,
+		local angular_node_modules = vim.fn.stdpath("data") .. "/mason/packages/angular-language-server/node_modules"
+		local angular_probe_path = angular_node_modules .. "/@angular/language-server/node_modules"
+		local vue_plugin_path = vim.fn.stdpath("data")
+			.. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
 
-			["angularls"] = function()
-				local ang_install_path = vim.fn.stdpath("data")
-					.. "/mason/packages/angular-language-server/node_modules"
-				local ang = ang_install_path .. "/@angular/language-server/node_modules"
-
-				local cmd = {
-					"ngserver",
-					"--stdio",
-					"--tsProbeLocations",
-					ang_install_path,
-					"--ngProbeLocations",
-					ang,
-				}
-
-				lspconfig["angularls"].setup({
-					capabilities = capabilities,
-					root_dir = lspconfig.util.root_pattern("angular.json", "project.json", "nx.json"),
-					cmd = cmd,
-					---@diagnostic disable-next-line: unused-local
-					on_new_config = function(new_config, new_root_dir)
-						new_config.cmd = cmd
-					end,
-				})
-			end,
-
-			["volar"] = function()
-				lspconfig["volar"].setup({
-					capabilities = capabilities,
-					filetypes = { "vue" },
-					root_dir = lspconfig.util.root_pattern("package.json", "nx.json", "vue.config.js"),
-					init_options = {
-						vue = {
-							hybridMode = false,
-						},
-					},
-				})
-			end,
-
-			["ts_ls"] = function()
-				lspconfig["ts_ls"].setup({
-					capabilities = capabilities,
-					filetypes = {
-						"typescript",
-						"javascript",
-						"javascriptreact",
-						"typescriptreact",
-						"typescript.tsx",
-					},
-					root_dir = lspconfig.util.root_pattern("package.json", "nx.json", "tsconfig.json"),
-					init_options = {
-						plugins = {
-							{
-								name = "@vue/typescript-plugin",
-								location = vim.fn.stdpath("data")
-									.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
-								languages = { "vue" },
-							},
-						},
-					},
-				})
-			end,
-
-			["graphql"] = function()
-				lspconfig["graphql"].setup({
-					capabilities = capabilities,
-					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-				})
-			end,
-
-			["emmet_ls"] = function()
-				lspconfig["emmet_ls"].setup({
-					capabilities = capabilities,
-					filetypes = {
-						"html",
-						"htmlangular",
-						"typescriptreact",
-						"javascriptreact",
-						"css",
-						"sass",
-						"scss",
-						"less",
-						"svelte",
-						"vue",
-					},
-				})
-			end,
-
-			["lua_ls"] = function()
-				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						Lua = {
-							-- recognise vim
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-							hint = { enable = true },
-						},
-					},
-				})
-			end,
-
-			["rust_analyzer"] = function()
-				-- NOTE: Disabled in favour of rustaceanvim
-
-				-- lspconfig["rust_analyzer"].setup({
-				-- 	capabilities = capabilities,
-				-- 	root_dir = lspconfig.util.root_pattern("Cargo.toml", ".git"),
-				-- 	filetypes = { "rust" },
-				-- 	settings = {
-				-- 		["rust_analyzer"] = {
-				-- 			cargo = {
-				-- 				allFeatures = true,
-				-- 			},
-				-- 		},
-				-- 	},
-				-- })
-			end,
-
-			["jdtls"] = function()
-				-- NOTE: We let jdtls configure itself
-			end,
-
-			["kotlin_language_server"] = function()
-				lspconfig["kotlin_language_server"].setup({
-					capabilities = capabilities,
-					root_dir = lspconfig.util.root_pattern(
-						"build.gradle.kts",
-						"settings.gradle.kts",
-						"pom.xml",
-						".git"
-					),
-					filetypes = { "kotlin", "kt", "kts" },
-					init_options = {
-						storagePath = vim.fn.resolve(vim.fn.stdpath("cache") .. "/kotlin_language_server"),
-					},
-					settings = kotlin_handler.settings(),
-				})
-			end,
+		vim.lsp.config("*", {
+			capabilities = capabilities,
 		})
+
+		vim.lsp.config("angularls", {
+			cmd = {
+				"ngserver",
+				"--stdio",
+				"--tsProbeLocations",
+				angular_node_modules,
+				"--ngProbeLocations",
+				angular_probe_path,
+			},
+			root_markers = { "angular.json", "project.json", "nx.json" },
+		})
+
+		vim.lsp.config("vue_ls", {
+			filetypes = { "vue" },
+			root_markers = { "package.json", "nx.json", "vue.config.js" },
+			init_options = {
+				vue = {
+					hybridMode = false,
+				},
+			},
+		})
+
+		vim.lsp.config("ts_ls", {
+			filetypes = {
+				"typescript",
+				"javascript",
+				"javascriptreact",
+				"typescriptreact",
+				"typescript.tsx",
+			},
+			root_markers = { "package.json", "nx.json", "tsconfig.json" },
+			init_options = {
+				plugins = {
+					{
+						name = "@vue/typescript-plugin",
+						location = vue_plugin_path,
+						languages = { "vue" },
+					},
+				},
+			},
+		})
+
+		vim.lsp.config("graphql", {
+			filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+		})
+
+		vim.lsp.config("emmet_ls", {
+			filetypes = {
+				"html",
+				"htmlangular",
+				"typescriptreact",
+				"javascriptreact",
+				"css",
+				"sass",
+				"scss",
+				"less",
+				"svelte",
+				"vue",
+			},
+		})
+
+		vim.lsp.config("lua_ls", {
+			settings = {
+				Lua = {
+					-- recognise vim
+					diagnostics = {
+						globals = { "vim" },
+					},
+					completion = {
+						callSnippet = "Replace",
+					},
+					hint = { enable = true },
+				},
+			},
+		})
+
+		vim.lsp.config("kotlin_language_server", {
+			root_markers = { "build.gradle.kts", "settings.gradle.kts", "pom.xml", ".git" },
+			filetypes = { "kotlin", "kt", "kts" },
+			init_options = {
+				storagePath = vim.fn.resolve(vim.fn.stdpath("cache") .. "/kotlin_language_server"),
+			},
+			settings = kotlin_handler.settings(),
+		})
+
+		-- We don't enable all servers by default
+		-- JDTLS handles its own activation
+		-- rust_analyzer is currently handled by rust.lua
+		for _, server_name in ipairs({
+			"angularls",
+			"bashls",
+			"cssls",
+			"emmet_ls",
+			"graphql",
+			"html",
+			"kotlin_language_server",
+			"lua_ls",
+			"pyright",
+			"tailwindcss",
+			"ts_ls",
+			"vue_ls",
+		}) do
+			vim.lsp.enable(server_name)
+		end
 	end,
 }
