@@ -152,6 +152,7 @@ return {
 			},
 		})
 
+		-- Currently disabled in favour of kotlin_lsp
 		-- vim.lsp.config("kotlin_language_server", {
 		-- 	root_markers = { "build.gradle.kts", "settings.gradle.kts", "pom.xml", ".git" },
 		-- 	filetypes = { "kotlin", "kt", "kts" },
@@ -160,14 +161,6 @@ return {
 		-- 	},
 		-- 	settings = kotlin_handler.legacy_kotlin_language_server_settings(),
 		-- })
-
-		vim.lsp.config("kotlin_lsp", {
-			root_markers = { "build.gradle.kts", "settings.gradle.kts", "pom.xml", ".git" },
-			filetypes = { "kotlin", "kt", "kts" },
-			init_options = {
-				storagePath = vim.fn.resolve(vim.fn.stdpath("cache") .. "/kotlin_lsp"),
-			},
-		})
 
 		-- We don't enable all servers by default
 		-- JDTLS handles its own activation
@@ -180,7 +173,6 @@ return {
 			"graphql",
 			"html",
 			-- "kotlin_language_server",
-			"kotlin_lsp",
 			"lua_ls",
 			"pyright",
 			"tailwindcss",
